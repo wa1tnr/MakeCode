@@ -320,6 +320,24 @@ Looks like pip installs yotta.
 
  vagrant $ sudo -H pip install yotta # oh dear god
 
+Now this was a big mistake, to pass on this (see immediately
+below) the last time this stuff got installed (not on a VM).
+
+Will take advantage of it, here and now:
+
+ [ http://docs.yottabuild.org/#yotta-itself-linux ]
+
+  quote: "You can use the following commands to allow the current user to override module dependencies using yotta link without sudo:"
+
+    sudo mkdir -p /usr/local/lib/yotta_modules
+    sudo chown $USER /usr/local/lib/yotta_modules
+    chmod 755 /usr/local/lib/yotta_modules
+
+This will hopefully allow future software packages (mostly
+from github, if I understand things correctly) .. to be
+installed without resorting to sudo.
+
+
  vagrant $ x
 
 CONTINUE EDITING HERE.  22:44z 27 July.

@@ -1,4 +1,4 @@
-Thu Jul 27 18:27:22 UTC 2017
+Thu Jul 27 22:20:21 UTC 2017
 
 Build the pxt-adafruit environment from scratch, on Linux
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -221,16 +221,98 @@ This next one is an extraction of the entire .xz tarball, to the current directo
 
  [ http://docs.yottabuild.org/#installing-on-linux ]
 
+ Now we're looking at satisfying yotta's dependencies.
+
+ This is where pip comes into it -- pip is like its own
+ package manager, complete with bar graphs as it does
+ massive downloading.  THIS IS WHY I went with a VM,
+ and why I'd prefer the whole makecode.adafruit.com
+ (pxt-adafruit) weren't on my primary hard disk -- too
+ promiscuous for me (by far).
+
+ Lot of third-party stuff here that's not from an official
+ Debian repository.  And stuff that won't install without
+ sudo (or whatever work-arounds are published) (somewhere).
+
+ docs.yottabuild.org says:
+
+ $ sudo apt-get update && sudo apt-get install python-setuptools  cmake build-essential ninja-build python-dev libffi-dev libssl-dev && sudo easy_install pip
+
+ I'd do the apt-get update as a separate step. And add a -d to 'apt get install': apt-get -d install .. to do that line.
+
+Here's my version:
+
+ $ sudo apt-get update
+
+ $ sudo apt-get -d install \
+        python-setuptools  cmake build-essential ninja-build \
+        python-dev libffi-dev libssl-dev
+
+ $ # sudo easy_install pip # do later .. not now
+
+ Just join the lines together where the \ characters are (and remove them) or paste as-is.
+
+Partial Transcript:
+
+vagrant $ sudo apt-get -d install \
+>         python-setuptools  cmake build-essential ninja-build \
+>         python-dev libffi-dev libssl-dev
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+build-essential is already the newest version.
+libffi-dev is already the newest version.
+The following extra packages will be installed:
+  cmake-data libarchive13 libexpat1 libexpat1-dev liblzo2-2 libnettle4
+  libpython-dev libpython2.7-dev libssl-doc python2.7-dev zlib1g-dev
+Suggested packages:
+  codeblocks eclipse lrzip
+The following NEW packages will be installed:
+  cmake cmake-data libarchive13 libexpat1-dev liblzo2-2 libnettle4
+  libpython-dev libpython2.7-dev libssl-dev libssl-doc ninja-build python-dev
+  python-setuptools python2.7-dev zlib1g-dev
+The following packages will be upgraded:
+  libexpat1
+1 upgraded, 15 newly installed, 0 to remove and 28 not upgraded.
+Need to get 28.7 MB of archives.
+After this operation, 62.4 MB of additional disk space will be used.
+Do you want to continue? [Y/n]
+.
+.
+Get:15 http://archive.ubuntu.com/ubuntu/ trusty/main python-dev amd64 2.7.5-5ubuntu3 [1,166 B]
+Get:16 http://archive.ubuntu.com/ubuntu/ trusty-updates/main python-setuptools all 3.3-1ubuntu2 [230 kB]
+Fetched 28.7 MB in 41s (699 kB/s)                                              
+Download complete and in download only mode
+
+
+ vagrant $ sudo apt-get -d install python-setuptools cmake build-essential ninja-build python-dev libffi-dev libssl-dev
+
+Inspect.  Then:
+
+#                       -d missing; is the -download only switch (and therefore, this time, all these are installed):
+
+ vagrant $ sudo apt-get    install python-setuptools cmake build-essential ninja-build python-dev libffi-dev libssl-dev
+
+
+
+Install pip, after inspecting the download session (if you feel the need).
+
+
+ vagrant $ sudo easy_install pip
+
 
  vagrant $ x
 
+ [ http://docs.yottabuild.org/#yotta-itself-linux ]
+
+Looks like pip installs yotta.
 
 
  vagrant $ x
  vagrant $ x
  vagrant $ x
 
-CONTINUE EDITING HERE.  21:45z 27 July.
+CONTINUE EDITING HERE.  22:20z 27 July.
 ###bookmark
 
 
@@ -322,4 +404,4 @@ Sample JavaScript (didn't run correctly):
 
 https://makecode.com/_e1dTaV2eHUtD
 
-Thu Jul 27 21:09:04 UTC 2017
+Thu Jul 27 22:20:21 UTC 2017

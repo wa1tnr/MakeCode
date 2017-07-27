@@ -210,6 +210,18 @@ This next one is an extraction of the entire .xz tarball, to the current directo
 
    Setting up nodejs (6.11.1-2nodesource1~trusty1) ...
 
+ [ https://makecode.com/cli ] also says yotta is needed.
+
+ yotta is a github repository. Repeatedly, google found the
+ answer to what is needed next, at github (this applies to
+ jake, 'typings' and probably other repos; one shall see as
+ this document progresses).
+
+ So then, there's
+
+ [ http://docs.yottabuild.org/#installing-on-linux ]
+
+
  vagrant $ x
 
 

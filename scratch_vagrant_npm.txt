@@ -381,18 +381,34 @@ Sanity Checks
 pip 9.0.1 from /usr/local/lib/python2.7/dist-packages/pip-9.0.1-py2.7.egg (python 2.7)
 vagrant $ 
 
-CONTINUE EDITING HERE.  22:59z 27 July.
-###bookmark
-
-
-
-
 
 
  - - - - - - - - - - - - - - - - - - - - - - - - 
 
 
 
+ So (still with us?) it'll be tentatively assumed that the
+ next section (scroll down) obtains; that this thing is
+ ready to rip.
+
+ The npm stuff.  Beginning with the 'git clone' stuff.
+
+ Mister pxt.git  stuff.
+
+ One shall see and experience (let's not get carried away with appending 'believe' to that).
+
+CONTINUE EDITING HERE.  23:06z 27 July.
+###bookmark
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ [ https://makecode.com/cli ]
+
+ [ https://github.com/Microsoft/pxt-adafruit/blob/master/README.md ]
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - 
 
 
 III.

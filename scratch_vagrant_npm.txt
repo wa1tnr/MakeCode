@@ -248,6 +248,10 @@ Here's my version:
         python-setuptools  cmake build-essential ninja-build \
         python-dev libffi-dev libssl-dev
 
+ $ sudo apt-get    install \
+        python-setuptools  cmake build-essential ninja-build \
+        python-dev libffi-dev libssl-dev
+
  $ # sudo easy_install pip # do later .. not now
 
  Just join the lines together where the \ characters are (and remove them) or paste as-is.
@@ -285,20 +289,29 @@ Fetched 28.7 MB in 41s (699 kB/s)
 Download complete and in download only mode
 
 
- vagrant $ sudo apt-get -d install python-setuptools cmake build-essential ninja-build python-dev libffi-dev libssl-dev
+ # REPEATED INFORMATION ONLY:  vagrant $ sudo apt-get -d install python-setuptools cmake build-essential ninja-build python-dev libffi-dev libssl-dev
 
 Inspect.  Then:
 
-#                       -d missing; is the -download only switch (and therefore, this time, all these are installed):
-
+            #           -d missing; is the -download only switch (and therefore, this time, all these are installed):
  vagrant $ sudo apt-get    install python-setuptools cmake build-essential ninja-build python-dev libffi-dev libssl-dev
 
 
-
-Install pip, after inspecting the download session (if you feel the need).
-
+Install pip, after (optionally) inspecting the download session.
 
  vagrant $ sudo easy_install pip
+
+
+
+
+That concludes the http://docs.yottabuild.org/#dependencies-linux part of this.
+
+
+
+
+ . . .
+
+
 
 
  vagrant $ x
@@ -307,9 +320,21 @@ Install pip, after inspecting the download session (if you feel the need).
 
 Looks like pip installs yotta.
 
+Did NOT sudo  to run 'pip install yotta'.
 
- vagrant $ x
- vagrant $ x
+To be sure:
+
+$ exit
+logout
+Connection to 127.0.0.1 closed.
+ host - script instrux $ vagrant ssh
+.
+.
+Last login: Thu Jul 27 19:38:24 2017 from 10.0.2.2
+vagrant@vagrant-ubuntu-trusty-64:~$ export PS1="vagrant $ "
+
+ vagrant $ sudo -H pip install yotta # oh dear god
+
  vagrant $ x
 
 CONTINUE EDITING HERE.  22:20z 27 July.

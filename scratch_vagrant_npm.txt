@@ -148,6 +148,14 @@ II. vagrant - run it once
 CONTINUE EDITING HERE.  21:08z 27 July.
 ###bookmark
 
+Now.
+
+ [ https://makecode.com/cli ] says node.js is needed:
+
+ [ https://nodejs.org/en/ ]
+
+
+
 
 
 

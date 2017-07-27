@@ -368,7 +368,18 @@ $ sudo apt-get update
 
 $ sudo apt-get install gcc-arm-embedded
 
- vagrant $ x
+
+The website says
+
+    To use this compiler, you’ll need to select a supported cross-compilation target, such as frdm-k64f-gcc, by running yotta target frdm-k64f-gcc before building.
+
+Not sure what to make of that; ignoring.
+
+Sanity Checks
+
+ vagrant $ pip -V
+pip 9.0.1 from /usr/local/lib/python2.7/dist-packages/pip-9.0.1-py2.7.egg (python 2.7)
+vagrant $ 
 
 CONTINUE EDITING HERE.  22:59z 27 July.
 ###bookmark

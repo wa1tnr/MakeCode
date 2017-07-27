@@ -1,0 +1,240 @@
+Thu Jul 27 18:27:22 UTC 2017
+
+Build the pxt-adafruit environment from scratch, on Linux
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+by wa1tnr
+
+Well, not from scratch.
+
+   To make an apple pie from scratch, first you must create the Universe.
+   --Carl Sagan (paraphrased?)
+
+
+from scratch (as it were):
+  Prerequisites: virtualbox and vagrant.  See the beginning of
+
+    [ https://learn.adafruit.com/micropython-for-samd21/build-firmware ]
+
+The attempt is to build a virtual machine that runs pxt-adafruit,
+inside that machine. /shrug  /might_work_who_knows
+
+This is the basic process being followed, much later on, after
+a vagrant-thing is ready to accept software and github repo
+cloning:
+
+    [ https://github.com/Microsoft/pxt-adafruit/blob/master/README.md ]
+
+
+I. vagrant preparations
+
+  a. install virtualbox and vagrant, per Tony DiCola's URI, above (https://learn...build-firmware).
+
+  18:30z:
+
+  b. clone the atmel-samd-micropython-vagrant stuff (from github) needed, in
+     order to build the virtualbox/vagrant thing.
+
+      $ cd ~ ; mkdir MkeC_BUILD # mnemonic for 'build MakeCode'
+
+      $ cd MkeC_BUILD/ # this is where one imitates what Tony DiCola did when
+                       # he cloned the SAMD21 MicroPython Vagrant configuration
+                       # repository
+
+      $ git clone https://github.com/adafruit/atmel-samd-micropython-vagrant.git
+      $                # yes, follow Tony's guide verbatim for this repository.
+
+      $ /bin/pwd; ls -la # confirmation - optional.
+
+     /home/mylogin/MkeC_BUILD
+
+     total 20
+     drwxr-xr-x  3 mylogin mylogin  4096 Jul 27 18:37 .
+     drwxr-xr-x 99 mylogin mylogin 12288 Jul 27 18:36 ..
+     drwxr-xr-x  3 mylogin mylogin  4096 Jul 27 18:37 atmel-samd-micropython-vagrant
+
+     Enter the newly-created directory (the git clone line created one, and populated it):
+
+      $ cd atmel-samd-micropython-vagrant
+
+     Quoting Tony,
+
+         Inside this directory is a text file called Vagrantfile.
+         This file is the configuration for the virtual machine
+         and also is the location where all vagrant commands should
+         be run.
+
+  18:46z
+  c. edit the Vagrantfile found here, if required.  Big if -- looking now.
+
+     i. I commented out line 56, which now reads:
+
+     56     # vb.customize ["usbfilter", "add", "0", "--target", :id, "--name", "Adafruit M0 Bootlo
+
+     Doesn't seem likely this line will do any good for present uses.
+     Perhaps a modification to it (later) is in order.
+
+     ii. I edited line 79 to include iceweasel (Firefox/Mozilla) as a lark, to
+         see how outrageous a request that is.
+
+     79     sudo apt-get install -y iceweasel build-essential git linux-image-extra-$(uname -r) lib
+
+         If it works, that implies a GUI environment inside the virtualbox/vagrant
+         may function -- doubt it, but worth a try.
+
+  d. make a Log directory; change to it; begin 'script' to log the mess that
+     may arise from trying to provision a VM with iceweasel:
+
+      $ cd ~/MkeC_BUILD; mkdir Log.d; cd Log.d; /bin/pwd
+     /home/mylogin/MkeC_BUILD/Log.d
+
+  e. start /usr/bin/script
+      $ script
+     Script started, file is typescript
+
+      $ /bin/pwd
+     /home/mylogin/MkeC_BUILD/Log.d
+
+      $ ls -la
+     total 8
+     drwxr-xr-x 2 mylogin mylogin 4096 Jul 27 18:59 .
+     drwxr-xr-x 4 mylogin mylogin 4096 Jul 27 18:57 ..
+     -rw-r--r-- 1 mylogin mylogin    0 Jul 27 18:59 typescript
+
+     The system now records the session to disk in the typescript file.
+     It's just a transcript of what was seen in the xterm (or other
+     shell) window (or Linux Virtual Console).
+
+  f. change directory to the vagrant directory
+
+      $ cd ../atmel-samd-micropython-vagrant/
+
+      $ /bin/pwd
+     /home/mylogin/MkeC_BUILD/atmel-samd-micropython-vagrant
+
+     Quoting Tony (second quote),
+
+         Make sure you're inside this atmel-samd-micropython-vagrant
+         directory with the Vagrantfile before running vagrant commands.
+
+
+II. vagrant - run it once
+  a. ch
+  a. provision the virtual machine (CAUTION: much is done automatically)
+
+      $ vagrant up  # this is also used repeatedly, in your workflow cycle, later on
+
+     Bringing machine 'default' up with 'virtualbox' provider...
+     ==> default: Importing base box 'ubuntu/trusty64'...
+
+     Note that you can watch what's going on, by starting a new session,
+     cd to that Log.d directory, and by typing:
+
+      $ tail -f ./typescript
+
+     Or you could use the 'less' $PAGER to look at the (growing) log file:
+
+      $ less    ./typescript
+
+     Note: Firefox was installed; the error when trying to launch was:
+
+     vagrant@vagrant-ubuntu-trusty-64:~$ which firefox
+     /usr/bin/firefox
+     vagrant@vagrant-ubuntu-trusty-64:~$ /usr/bin/firefox 
+     Error: GDK_BACKEND does not match available displays
+     vagrant@vagrant-ubuntu-trusty-64:~$ 
+
+
+CONTINUE EDITING HERE.  21:08z 27 July.
+###bookmark
+
+
+
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+
+
+
+III.
+
+npm stuff from 
+
+    [ https://github.com/Microsoft/pxt-adafruit/blob/master/README.md ] REPEATED URI, FROM ABOVE
+
+cd ; mkdir pxt-m; cd pxt-m/ # arbitrary top level directory name
+
+git clone https://github.com/typings/typings.git
+git clone https://github.com/jakejs/jake.git
+git clone https://github.com/Microsoft/pxt.git
+git clone https://github.com/Microsoft/pxt-common-packages.git
+git clone https://github.com/Microsoft/pxt-adafruit.git
+
+cd    pxt
+
+sudo  npm      install
+sudo  npm      rebuild   node-gyp  -g
+sudo  typings  install
+
+cd ../pxt-common-packages/
+
+sudo  npm      install
+sudo  npm      rebuild   node-gyp  --global
+sudo  npm      link      ../pxt
+
+sudo  npm      rebuild   node-gyp  --global  # yes, iterate these two twice
+sudo  npm      link      ../pxt
+
+cd ../pxt-adafruit/
+
+sudo  npm      install
+sudo  npm      rebuild   node-gyp  --global
+sudo  npm      link      ../pxt
+sudo  npm      link      ../pxt-common-packages
+
+cd ../jake/
+sudo  npm      install
+
+cd ../typings/
+sudo  npm      install
+
+cd ../
+
+sudo  pxt      target    adafruit
+sudo  npm      rebuild   node-gyp  --global
+sudo  pxt      target    adafruit  # yes, iterate this twice
+
+
+cd ./pxt/
+sudo ../jake/jake
+
+export PATH=$PATH:/home/mylogin/pxt-m/jake
+
+cd ./pxt-adafruit/
+serve --cloud
+
+
+
+What's missing are at least one soft link, and a chmod to make $HOME/pxt-m/jake/jake an executable script.
+
+ $ /bin/pwd
+/home/mylogin/pxt-m/jake/node_modules/jake
+ $ ls -la | egrep bin
+lrwxrwxrwx  1 root root    9 Jul 27 03:30 bin -> ../../bin
+ $ 
+
+
+And a $PATH modification to include $HOME/pxt-m/jake in the path.
+
+// commands to install pxt-adafruit, based on:
+
+https://github.com/Microsoft/pxt-adafruit/blob/master/README.md
+
+Sample JavaScript (didn't run correctly):
+
+https://makecode.com/_e1dTaV2eHUtD
+
+Thu Jul 27 21:09:04 UTC 2017

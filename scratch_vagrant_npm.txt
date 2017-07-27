@@ -439,17 +439,28 @@ git clone https://github.com/Microsoft/pxt.git
 git clone https://github.com/Microsoft/pxt-common-packages.git
 git clone https://github.com/Microsoft/pxt-adafruit.git
 
-cd    pxt
+cd    typings
+sudo  npm      install
+
+cd    ../jake
+sudo  npm      install
+
+cd    ../pxt
 
 sudo  npm      install
 sudo  npm      rebuild   node-gyp  -g
-sudo  typings  install
+
+cd    ../typings
+sudo  npm      install
+
 
 cd ../pxt-common-packages/
 
 sudo  npm      install
 sudo  npm      rebuild   node-gyp  --global
 sudo  npm      link      ../pxt
+
+### Here
 
 sudo  npm      rebuild   node-gyp  --global  # yes, iterate these two twice
 sudo  npm      link      ../pxt

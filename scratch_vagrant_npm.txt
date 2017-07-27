@@ -410,6 +410,18 @@ CONTINUE EDITING HERE.  23:06z 27 July.
 
  - - - - - - - - - - - - - - - - - - - - - - - - 
 
+Now this guy here says:
+
+ [ https://makecode.com/cli ]
+
+$ npm install -g pxt
+
+But that seems bogus (redundant).  And it's just floating in
+space, with no context.
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - 
+
 
 III.
 

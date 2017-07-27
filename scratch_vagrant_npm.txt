@@ -338,6 +338,31 @@ from github, if I understand things correctly) .. to be
 installed without resorting to sudo.
 
 
+CROSS-COMPILER foo
+
+This DID get done the last time:
+
+ [ http://docs.yottabuild.org/#linux-cross-compile ]
+
+The eabi stuff is what Arduino IDE uses, but it was assumed
+that was in a private directory.
+
+vagrant $ # remove the built-in package, if installed:
+vagrant $ sudo apt-get remove binutils-arm-none-eabi gcc-arm-none-eabi
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'binutils-arm-none-eabi' is not installed, so not removed
+Package 'gcc-arm-none-eabi' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 28 not upgraded.
+vagrant $ 
+
+
+# set up the PPA for the ARM-maintained package:
+sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
+sudo apt-get update
+
+
  vagrant $ x
 
 CONTINUE EDITING HERE.  22:44z 27 July.

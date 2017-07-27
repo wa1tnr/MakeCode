@@ -1,0 +1,73 @@
+  1 cd ; mkdir pxt-m; cd pxt-m/ # arbitrary top level directory name
+  2 
+  3 git clone https://github.com/typings/typings.git
+  4 git clone https://github.com/jakejs/jake.git
+  5 git clone https://github.com/Microsoft/pxt.git
+  6 git clone https://github.com/Microsoft/pxt-common-packages.git
+  7 git clone https://github.com/Microsoft/pxt-adafruit.git
+  8 
+  9 cd    pxt
+ 10 
+ 11 sudo  npm      install
+ 12 sudo  npm      rebuild   node-gyp  -g
+ 13 sudo  typings  install
+ 14 
+ 15 cd ../pxt-common-packages/
+ 16 
+ 17 sudo  npm      install
+ 18 sudo  npm      rebuild   node-gyp  --global
+ 19 sudo  npm      link      ../pxt
+ 20
+ 21 sudo  npm      rebuild   node-gyp  --global  # yes, iterate these two twice
+ 22 sudo  npm      link      ../pxt
+ 23 
+ 24 cd ../pxt-adafruit/
+ 25 
+ 26 sudo  npm      install
+ 27 sudo  npm      rebuild   node-gyp  --global
+ 28 sudo  npm      link      ../pxt
+ 29 sudo  npm      link      ../pxt-common-packages
+ 30 
+ 31 cd ../jake/
+ 32 sudo  npm      install
+ 33 
+ 34 cd ../typings/
+ 35 sudo  npm      install
+ 36 
+ 37 cd ../
+ 38 
+ 39 sudo  pxt      target    adafruit
+ 40 sudo  npm      rebuild   node-gyp  --global
+ 41 sudo  pxt      target    adafruit  # yes, iterate this twice
+ 42 
+ 43 
+ 44 cd ./pxt/
+ 45 sudo ../jake/jake
+ 46 
+ 47 export PATH=$PATH:/home/mylogin/pxt-m/jake
+ 48 
+ 49 cd ./pxt-adafruit/
+ 50 serve --cloud
+"npm_commands.txt"
+
+
+What's missing are at least one soft link, and a chmod to make $HOME/pxt-m/jake/jake an executable script.
+
+ $ /bin/pwd
+/home/mylogin/pxt-m/jake/node_modules/jake
+ $ ls -la | egrep bin
+lrwxrwxrwx  1 root root    9 Jul 27 03:30 bin -> ../../bin
+ $ 
+
+
+And a $PATH modification to include $HOME/pxt-m/jake in the path.
+
+// commands to install pxt-adafruit, based on:
+
+https://github.com/Microsoft/pxt-adafruit/blob/master/README.md
+
+Sample JavaScript (didn't run correctly):
+
+https://makecode.com/_e1dTaV2eHUtD
+
+Thu Jul 27 05:05:40 UTC 2017
